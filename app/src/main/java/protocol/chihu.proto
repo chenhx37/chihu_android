@@ -1,0 +1,82 @@
+
+enum School{
+Sun_Yat_San_University = 1;
+}
+    
+enum Status{
+succeed =  1;
+fail = 2;
+}
+
+message Response{
+    required Status status = 1;
+    optional string message = 2;
+}
+
+message UserAccount{
+    required string username = 1;
+    required string password = 2;
+    required string email = 3;
+    required School school = 4;
+}
+
+message LoginRequest{
+    required string username = 1;
+    required string password = 2;
+}
+
+message Meal{
+    required string imageUrl = 1;
+    required string name = 2;
+    required string price = 3;
+}
+
+
+message MealAndNumberPair{
+    required string mealId = 1;
+    required int32 number = 2;
+}
+
+message RegisterUserRequest{
+    required UserAccount userAccount = 1;
+}
+
+message CheckNetIdRequest{
+    required string netid = 1;
+    required string password = 2;
+}
+
+message Canteen{
+    required string name = 1;
+    required int32 canteenId = 2;
+    repeated string openTimes = 3;
+}
+
+message ViewCanteensRequest{}
+
+message ViewCanteensResponse{
+    repeated Canteen canteens = 1;
+}
+
+message ViewMealsRequest{
+    required int32 canteenId = 1;
+}
+
+message ViewMealsResponse{
+    repeated Meal meals = 1;
+}
+
+message MakeOrderRequest{
+    required int32 canteenId = 1;
+    repeated MealAndNumberPair mealAndNumberPairs = 2;
+    required string totalPrice = 3;
+}
+
+message CustomerFinishOrderRequest{
+    required string orderId = 1;
+}
+
+message CustomerCancelOrderRequest{
+    required string orderId = 1;
+    required string reason = 2;
+}

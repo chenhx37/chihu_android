@@ -4,7 +4,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.heinzchen.chihu.net.INetCallbackListener;
 import com.heinzchen.chihu.net.NetworkManager;
 import com.heinzchen.chihu.net.ProtocolManager;
-import com.heinzchen.chihu.protocol.Chihu;
+import protocol.Chihu;
 import com.heinzchen.chihu.utils.MLog;
 
 import org.greenrobot.eventbus.EventBus;

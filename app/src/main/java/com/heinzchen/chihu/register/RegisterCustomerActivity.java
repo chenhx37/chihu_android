@@ -9,11 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.heinzchen.chihu.CApplication;
 import com.heinzchen.chihu.login.LoginActivity;
-import com.heinzchen.chihu.protocol.Chihu;
 import com.heinzchen.chihu.R;
-import com.heinzchen.chihu.net.NetworkManager;
 import com.heinzchen.chihu.utils.EventBusMessage;
 import com.heinzchen.chihu.utils.MLog;
 

@@ -12,6 +12,8 @@ public class InterfaceDef {
     public static final String REGISTER_USER = "/register/";
     public static final String LOGIN = "/login/";
     public static final String VIEW_CANTEENS = "/viewCanteens/";
+    public static final String VIEW_MEALS = "/viewMeals/";
+
 
 
 }

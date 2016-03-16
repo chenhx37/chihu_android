@@ -1,0 +1,1 @@
+protoc --java_out=app\src\main\java\protocol app\src\main\java\protocol\chihu.proto

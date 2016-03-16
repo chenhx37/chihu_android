@@ -1,7 +1,7 @@
 package com.heinzchen.chihu.net;
 
 import com.heinzchen.chihu.CApplication;
-import com.heinzchen.chihu.protocol.Chihu;
+import protocol.Chihu;
 import com.heinzchen.chihu.utils.MLog;
 import com.heinzchen.chihu.utils.SharedPreferenceUtil;
 
@@ -104,6 +104,32 @@ public class ProtocolManager {
                 .build();
         RequestBody body = RequestBody.create(JSON, request.toByteArray());
 
+        Request.Builder builder = new Request.Builder();
+        builder.url(url)
+                .post(body);
+
+        String cookie = SharedPreferenceUtil.getInstance().getString(NetworkManager.COOKIE, null);
+        if (null != cookie) {
+            MLog.i(TAG, cookie);
+            builder.addHeader(SET_COOKIE_HEADER, cookie);
+        }
+
+        Request httpRequest = builder.build();
+        return httpRequest;
+    }
+
+    public static Request getViewMealsRequest(int canteenId) {
+        String url;
+        if (CApplication.DEBUG) {
+            url = InterfaceDef.CHIHU_DEBUG_SERVER.concat(InterfaceDef.VIEW_MEALS);
+        } else {
+            url = InterfaceDef.CHIHU_SERVER.concat(InterfaceDef.VIEW_MEALS);
+        }
+        Chihu.ViewMealsRequest request_pb = Chihu.ViewMealsRequest.newBuilder()
+                .setCanteenId(canteenId)
+                .build();
+
+        RequestBody body = RequestBody.create(JSON, request_pb.toByteArray());
         Request.Builder builder = new Request.Builder();
         builder.url(url)
                 .post(body);

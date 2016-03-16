@@ -1,12 +1,12 @@
 package com.heinzchen.chihu.main;
 
-import android.net.ConnectivityManager;
+import android.util.Log;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.heinzchen.chihu.net.INetCallbackListener;
 import com.heinzchen.chihu.net.NetworkManager;
 import com.heinzchen.chihu.net.ProtocolManager;
-import com.heinzchen.chihu.protocol.Chihu;
+import protocol.Chihu;
 import com.heinzchen.chihu.utils.EventBusMessage;
 import com.heinzchen.chihu.utils.MLog;
 
@@ -17,7 +17,8 @@ import okhttp3.Request;
 /**
  * Created by chen on 2016/3/13.
  */
-public class MainProcessor implements INetCallbackListener{
+public class MainProcessor {
+
     public static final String TAG = MainProcessor.class.getSimpleName();
     private static MainProcessor mInstance;
 
@@ -36,33 +37,67 @@ public class MainProcessor implements INetCallbackListener{
         return mInstance;
     }
 
-    @Override
-    public void onResponse(String pbstr) {
-        MLog.i(TAG, "onResponse");
-        Chihu.ViewCanteensResponse resp = null;
-        try {
-            resp = Chihu.ViewCanteensResponse.parseFrom(pbstr.getBytes());
-        } catch (InvalidProtocolBufferException e) {
-            MLog.e(TAG, e.getMessage());
-        }
-        if (null == resp) {
-            ViewCanteenMessage msg = new ViewCanteenMessage();
-            msg.state = EventBusMessage.FAIL;
-            msg.msg = "解析错误";
-            EventBus.getDefault().post(msg);
-            return;
-        }
-
-        ViewCanteenMessage msg = new ViewCanteenMessage();
-        msg.state = EventBusMessage.SUCCEED;
-        msg.canteens = resp.getCanteensList();
-
-        EventBus.getDefault().post(msg);
-
-    }
 
     public void viewCanteens() {
         Request request = ProtocolManager.getViewCanteensRequest();
-        NetworkManager.getInstance().sendRequest(request, this);
+        NetworkManager.getInstance().sendRequest(request, new INetCallbackListener() {
+            @Override
+            public void onResponse(String pbString) {
+                MLog.i(TAG, "onResponse");
+                Chihu.ViewCanteensResponse resp = null;
+                MLog.e(TAG, (new Integer(pbString.getBytes().length)).toString());
+
+                try {
+                    resp = Chihu.ViewCanteensResponse.parseFrom(pbString.getBytes());
+                } catch (InvalidProtocolBufferException e) {
+                    MLog.e(TAG, e.getMessage());
+                }
+                if (null == resp) {
+                    ViewCanteenMessage msg = new ViewCanteenMessage();
+                    msg.state = EventBusMessage.FAIL;
+                    msg.msg = "解析错误";
+                    EventBus.getDefault().post(msg);
+                    return;
+                }
+
+                ViewCanteenMessage msg = new ViewCanteenMessage();
+                msg.state = EventBusMessage.SUCCEED;
+                msg.canteens = resp.getCanteensList();
+
+                EventBus.getDefault().post(msg);
+
+            }
+        });
+    }
+
+    public void viewMeals(int canteenId) {
+        Request request = ProtocolManager.getViewMealsRequest(canteenId);
+        NetworkManager.getInstance().sendRequest(request, new INetCallbackListener() {
+            @Override
+            public void onResponse(String pbString) {
+                MLog.i(TAG, "onResponse,viewMeals");
+                Chihu.ViewMealsResponse resp = null;
+                MLog.e(TAG, (new Integer(pbString.getBytes().length)).toString());
+                try {
+                    resp = Chihu.ViewMealsResponse.parseFrom(pbString.getBytes());
+                } catch (InvalidProtocolBufferException e) {
+                    MLog.e(TAG, e.getMessage());
+                }
+
+                if (null == resp) {
+                    ViewMealsMessage msg = new ViewMealsMessage();
+                    msg.state = EventBusMessage.FAIL;
+                    msg.msg = "解析错误";
+                    EventBus.getDefault().post(msg);//to MainFragment
+                    return;
+                }
+                ViewMealsMessage msg = new ViewMealsMessage();
+                msg.state = EventBusMessage.SUCCEED;
+                msg.meals = resp.getMealsList();
+                EventBus.getDefault().post(msg);//to MainFragment
+
+            }
+        });
+
     }
 }

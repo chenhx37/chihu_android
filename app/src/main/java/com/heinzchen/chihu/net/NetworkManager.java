@@ -3,7 +3,6 @@ package com.heinzchen.chihu.net;
 import android.content.SharedPreferences;
 
 import com.heinzchen.chihu.CApplication;
-import com.heinzchen.chihu.protocol.Chihu;
 import com.heinzchen.chihu.utils.MLog;
 
 import java.io.IOException;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**

@@ -1,9 +1,8 @@
 package com.heinzchen.chihu.main;
 
-import com.heinzchen.chihu.protocol.Chihu;
+import protocol.Chihu;
 import com.heinzchen.chihu.utils.EventBusMessage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

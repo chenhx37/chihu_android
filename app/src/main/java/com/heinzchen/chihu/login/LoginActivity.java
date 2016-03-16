@@ -1,7 +1,6 @@
 package com.heinzchen.chihu.login;
 
 import android.app.Activity;
-import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +10,7 @@ import android.widget.Toast;
 
 import com.heinzchen.chihu.R;
 import com.heinzchen.chihu.main.MainActivity;
-import com.heinzchen.chihu.protocol.Chihu;
 import com.heinzchen.chihu.register.RegisterCustomerActivity;
-import com.heinzchen.chihu.utils.EventBusMessage;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
