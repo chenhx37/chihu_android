@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.heinzchen.chihu.CApplication;
 import com.heinzchen.chihu.R;
 import protocol.Chihu;
+
+import com.heinzchen.chihu.dishes.DishesActivity;
 import com.heinzchen.chihu.utils.EventBusMessage;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -23,7 +25,9 @@ public class MainFragment extends Fragment {
         @Override
         public void onClick(View v) {
             int canteenId = (Integer) v.getTag();
-            MainProcessor.getInstance().viewMeals(canteenId);
+            Bundle bundle = new Bundle();
+            bundle.putInt(DishesActivity.canteenId, canteenId);
+            DishesActivity.jumpToMe(getActivity(), bundle);
         }
     };
 
@@ -51,33 +55,7 @@ public class MainFragment extends Fragment {
 
 
 
-    @Subscribe
-    public void onEvent(ViewMealsMessage msg) {
-        switch (msg.state) {
-            case EventBusMessage.FAIL: {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(CApplication.GLOBAL_CONTEXT, "获取美食列表失败", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
-            }
-            case EventBusMessage.SUCCEED: {
-                // TODO: 2016/3/16
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(CApplication.GLOBAL_CONTEXT, "获取美食列表成功", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
 
-            }
-            default:
-                break;
-        }
-    }
 
 
     @Subscribe

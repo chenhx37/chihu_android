@@ -1,8 +1,7 @@
 package com.heinzchen.chihu.main;
 
-import android.util.Log;
-
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.heinzchen.chihu.dishes.ViewMealsMessage;
 import com.heinzchen.chihu.net.INetCallbackListener;
 import com.heinzchen.chihu.net.NetworkManager;
 import com.heinzchen.chihu.net.ProtocolManager;
@@ -71,6 +70,7 @@ public class MainProcessor {
     }
 
     public void viewMeals(int canteenId) {
+        MLog.i(TAG, "viewMeals");
         Request request = ProtocolManager.getViewMealsRequest(canteenId);
         NetworkManager.getInstance().sendRequest(request, new INetCallbackListener() {
             @Override
@@ -88,13 +88,13 @@ public class MainProcessor {
                     ViewMealsMessage msg = new ViewMealsMessage();
                     msg.state = EventBusMessage.FAIL;
                     msg.msg = "解析错误";
-                    EventBus.getDefault().post(msg);//to MainFragment
+                    EventBus.getDefault().post(msg);//to DishesActivity
                     return;
                 }
                 ViewMealsMessage msg = new ViewMealsMessage();
                 msg.state = EventBusMessage.SUCCEED;
                 msg.meals = resp.getMealsList();
-                EventBus.getDefault().post(msg);//to MainFragment
+                EventBus.getDefault().post(msg);//to DishesActivity
 
             }
         });
