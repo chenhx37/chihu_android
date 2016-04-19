@@ -13,7 +13,18 @@ public class InterfaceDef {
     public static final String LOGIN = "/login/";
     public static final String VIEW_CANTEENS = "/viewCanteens/";
     public static final String VIEW_MEALS = "/viewMeals/";
+    public static final String UPDATE_PROFILE = "/updateProfile/";
+    public static final String GET_PROFILE = "/getProfile/";
+    public static final String GET_CANTEENS = "/getCanteens/";
+    public static final String ADD_DISH = "/addDish/";
+    public static final String ADD_CANTEEN = "/addCanteen/";
+    public static final String GET_PROVIDER_ORDER = "/getProviderOrder/";
+
+
+
+
 
 
 
 }
+

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="title_font_size">24sp</dimen>
+    <dimen name="title_btn_font_size">20sp</dimen>
     <dimen name="menu_font_size">18sp</dimen>
+    <dimen name="profile_text_size">18sp</dimen>
+
+    <dimen name="title_btn_margin">5dp</dimen>
 
 
 </resources>

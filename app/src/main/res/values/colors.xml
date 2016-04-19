@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="divider">#BBBBBB</color>
+
+    <color name="positive">#2ecc71</color>
+    <color name="negative">#c0392b</color>
+    <color name="title">#2980b9</color>
+</resources>

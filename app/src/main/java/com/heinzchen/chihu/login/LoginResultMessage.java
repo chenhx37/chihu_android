@@ -7,4 +7,5 @@ import com.heinzchen.chihu.utils.EventBusMessage;
  */
 public class LoginResultMessage extends EventBusMessage {
     public int result;
+    public int type;
 }

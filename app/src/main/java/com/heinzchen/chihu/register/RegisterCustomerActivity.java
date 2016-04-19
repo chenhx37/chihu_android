@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.heinzchen.chihu.login.LoginActivity;
@@ -26,6 +27,8 @@ public class RegisterCustomerActivity extends Activity implements View.OnClickLi
     private EditText mUsername;
     private EditText mPassword;
     private EditText mEmail;
+    private Spinner mType;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class RegisterCustomerActivity extends Activity implements View.OnClickLi
         mUsername = (EditText) findViewById(R.id.username);
         mPassword = (EditText) findViewById(R.id.password);
         mEmail = (EditText) findViewById(R.id.email);
+        mType = (Spinner) findViewById(R.id.register_account_type_spinner);
 
         findViewById(R.id.finish).setOnClickListener(this);
         findViewById(R.id.cancel).setOnClickListener(this);
@@ -84,7 +88,6 @@ public class RegisterCustomerActivity extends Activity implements View.OnClickLi
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
-
     }
 
     @Override
@@ -99,7 +102,9 @@ public class RegisterCustomerActivity extends Activity implements View.OnClickLi
                     String username = mUsername.getText().toString();
                     String password = mPassword.getText().toString();
                     String email = mEmail.getText().toString();
-                    RegisterCustomerProcessor.getInstance().registerUser(username, password, email, "SunYatSanUniversity");
+                    String type = mType.getSelectedItem().toString();
+                    MLog.i(TAG, type);
+                    RegisterCustomerProcessor.getInstance().registerUser(username, password, email, "SunYatSanUniversity", type);
 
 //                    Chihu.UserAccount.Builder builder = Chihu.UserAccount.newBuilder();
 //                    builder.setUsername(username);

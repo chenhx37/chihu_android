@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="account_type" >
+        <item>顾客用户</item>
+        <item>饭堂用户</item>
+    </string-array>
+
+</resources>

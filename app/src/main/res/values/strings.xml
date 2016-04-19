@@ -13,4 +13,7 @@
 
     <string name="home_page_title">首页</string>
 
+    <string name="cart_is_empty">购物车空空如也</string>
+    <string name="make_order">结算</string>
+
 </resources>

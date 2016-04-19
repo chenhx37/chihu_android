@@ -41,9 +41,9 @@ public class LoginProcessor implements INetCallbackListener {
 
     @Override
     public void onResponse(String pbStr) {
-        Chihu.Response response = null;
+        Chihu.LoginResponse response = null;
         try {
-            response = Chihu.Response.parseFrom(pbStr.getBytes());
+            response = Chihu.LoginResponse.parseFrom(pbStr.getBytes());
         } catch (InvalidProtocolBufferException e) {
             MLog.e(TAG, e.getMessage());
         }
@@ -72,11 +72,14 @@ public class LoginProcessor implements INetCallbackListener {
             //登录成功
             LoginResultMessage msg = new LoginResultMessage();
             msg.result = LoginResultMessage.SUCCEED;
+            msg.type = response.getType().getNumber();
+
             if (response.hasMessage()) {
                 msg.msg = response.getMessage();
             } else {
                 msg.msg = "登录成功";
             }
+
             EventBus.getDefault().post(msg);//to LoginActivity
         }
     }

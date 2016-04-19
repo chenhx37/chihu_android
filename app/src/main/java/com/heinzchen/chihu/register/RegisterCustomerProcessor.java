@@ -32,8 +32,8 @@ public class RegisterCustomerProcessor implements INetCallbackListener {
         return mInstance;
     }
 
-    public void registerUser(String username, String password, String email, String school) {
-        Request request = ProtocolManager.getRegisterUserRequest(username, password, email, school);
+    public void registerUser(String username, String password, String email, String school, String type) {
+        Request request = ProtocolManager.getRegisterUserRequest(username, password, email, school, type);
         NetworkManager.getInstance().sendRequest(request, this);
     }
 

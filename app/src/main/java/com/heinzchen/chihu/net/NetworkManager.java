@@ -3,6 +3,7 @@ package com.heinzchen.chihu.net;
 import android.content.SharedPreferences;
 
 import com.heinzchen.chihu.CApplication;
+import com.heinzchen.chihu.account.ProfileManager;
 import com.heinzchen.chihu.utils.MLog;
 
 import java.io.IOException;
@@ -68,48 +69,6 @@ public class NetworkManager {
         if (null == cookie) {
             return;
         }
-
-        SharedPreferences sp = CApplication.GLOBAL_CONTEXT.getSharedPreferences("Chihu", 0);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(COOKIE, cookie);
-        editor.apply();
+        ProfileManager.getInstance().setCookie(cookie);
     }
-//    @Deprecated
-//    public void requestRegisterUser(final Chihu.UserAccount userAccount) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                String url = InterfaceDef.CHIHU_SERVER+InterfaceDef.REGISTER_USER;
-//                byte[] byteArray = userAccount.toByteArray();
-//
-//                OkHttpClient client = new OkHttpClient();
-//                RequestBody body = RequestBody.create(JSON, byteArray);
-//                MLog.i(TAG, "the body is " + body.toString());
-//
-//                Request request = new Request.Builder()
-//                        .url(url)
-//                        .post(body)
-//                        .build();
-//
-//                Request getRequest = new Request.Builder()
-//                        .url(url)
-//                        .build();
-//
-//
-//                try {
-//                    Response getResponse = client.newCall(getRequest).execute();
-//
-//                    MLog.i(TAG, "going to request");
-//                    Response response = client.newCall(request).execute();
-//                    MLog.i(TAG, "request Done");
-//                    MLog.i(TAG, response.body().string());
-//                } catch (IOException e) {
-//                    MLog.e(TAG, e.getMessage());
-//                }
-//
-//            }
-//        }).start();
-//
-//
-//    }
 }

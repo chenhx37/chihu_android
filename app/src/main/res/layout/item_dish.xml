@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:padding="5dp">
+
+
 
     <TextView
         android:id="@+id/dish_name"
-        android:textSize="@dimen/title_font_size"
+        android:textSize="20sp"
         android:text="Name"
+        android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -20,11 +27,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <CheckBox
+
+    <TextView
         android:id="@+id/add_dish"
-        android:text="add"
-        android:layout_alignParentRight="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_marginRight="10dp"
+        android:textColor="@android:color/white"
+        android:background="@color/positive"
+        android:text="添加"
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
